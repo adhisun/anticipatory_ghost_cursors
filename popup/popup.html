@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ghost Cursors</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <span class="ghost-icon">👻</span>
+        <div>
+          <h1 class="title">Ghost Cursors</h1>
+          <div class="subtitle">Anticipatory Cross-Tab Agent</div>
+        </div>
+      </div>
+      <div id="ai-status" class="ai-status-pill">Checking AI...</div>
+    </header>
+
+    <!-- Active Intents Section -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Pending Intents (<span id="intent-count">0</span>)</h2>
+        <button id="btn-clear-all" class="btn-text-danger" style="display: none;">Clear All</button>
+      </div>
+
+      <div id="intents-container" class="intents-list">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- Quick Test / Context Simulator -->
+    <section class="section">
+      <h2 class="section-title">Quick Context Simulator</h2>
+      <div class="test-input-wrapper">
+        <textarea id="test-text" rows="2" placeholder="e.g. Schedule 1-on-1 with Sarah tomorrow at 2:00 PM"></textarea>
+        <button id="btn-simulate" class="btn-action">Extract Intent</button>
+      </div>
+    </section>
+
+    <!-- Quick Launch Demos -->
+    <section class="section">
+      <h2 class="section-title">Bundled Demo Pages</h2>
+      <div class="demo-buttons">
+        <button id="btn-open-email" class="btn-demo">📨 Mock Email (Source)</button>
+        <button id="btn-open-calendar" class="btn-demo">📅 Mock Calendar (Target)</button>
+        <button id="btn-open-tasks" class="btn-demo">📋 Mock Tasks (Target)</button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>TTL: 15 minutes per intent</span>
+      <span>Manifest V3</span>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

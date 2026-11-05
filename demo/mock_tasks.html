@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mock Task Tracker - Ghost Cursors Demo</title>
+  <link rel="stylesheet" href="demo_shared.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <span>👻</span>
+      <span>Ghost Cursors Simulator</span>
+    </div>
+    <div class="nav-tabs">
+      <a href="mock_email.html" class="nav-link">📨 Source: Mock Email</a>
+      <a href="mock_calendar.html" class="nav-link">📅 Target: Mock Calendar</a>
+      <a href="mock_tasks.html" class="nav-link active">📋 Target: Mock Tasks</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="page-header">
+      <h1 class="page-title">Mock Project Management (Tab B: Target Application)</h1>
+      <p class="page-desc">
+        When a task or bug report intent is pending from Tab A, Ghost Cursor detects this task form,
+        presents an anticipation card, and automatically executes input population and task creation.
+      </p>
+    </header>
+
+    <div class="card" id="task-form-card">
+      <h2 style="font-size: 18px; color: #ffffff; margin-bottom: 20px;">Create New Task or Issue</h2>
+
+      <form id="task-form" onsubmit="handleTaskSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="task-title">Task Summary / Title</label>
+            <input type="text" id="task-title" placeholder="e.g. Fix checkout button issue" required autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="task-assignee">Assignee</label>
+            <input type="text" id="task-assignee" placeholder="e.g. Alex Rivera" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="task-due-date">Due Date</label>
+            <input type="text" id="task-due-date" placeholder="e.g. Friday" autocomplete="off">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="task-description">Description &amp; Acceptance Criteria</label>
+            <textarea id="task-description" rows="4" placeholder="Detailed description of bug or task..."></textarea>
+          </div>
+
+          <div class="form-group full-width" style="margin-top: 10px;">
+            <button type="submit" id="btn-create-task" class="btn-submit">
+              Create Task Issue
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="success-banner" id="task-success">
+        ✓ Task successfully created! <span id="task-summary"></span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function handleTaskSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('task-title').value;
+      const assignee = document.getElementById('task-assignee').value;
+      const banner = document.getElementById('task-success');
+      const summary = document.getElementById('task-summary');
+
+      summary.textContent = `"${title}"${assignee ? ' assigned to ' + assignee : ''}.`;
+      banner.style.display = 'block';
+
+      // Auto-hide after 6 seconds
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 6000);
+    }
+  </script>
+</body>
+</html>

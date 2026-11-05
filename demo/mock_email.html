@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mock Email Inbox - Ghost Cursors Demo</title>
+  <link rel="stylesheet" href="demo_shared.css">
+  <style>
+    .inbox-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .email-item {
+      background: #131c2e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .email-item:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .email-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .email-sender {
+      font-weight: 700;
+      color: #ffffff;
+      font-size: 15px;
+    }
+
+    .email-time {
+      font-size: 12px;
+      color: #64748b;
+    }
+
+    .email-subject {
+      font-size: 14px;
+      font-weight: 600;
+      color: #818cf8;
+      margin-bottom: 10px;
+    }
+
+    .email-body {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      padding: 12px 14px;
+      background: rgba(11, 17, 32, 0.6);
+      border-radius: 8px;
+      border-left: 3px solid #6366f1;
+      margin-bottom: 14px;
+      user-select: text;
+    }
+
+    .email-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-quick-send {
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-quick-send:hover {
+      background: #6366f1;
+      color: #ffffff;
+    }
+
+    .sent-notice {
+      display: none;
+      font-size: 12px;
+      color: #34d399;
+      font-weight: 600;
+    }
+
+    .target-links-card {
+      margin-top: 28px;
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 12px;
+      padding: 18px 22px;
+    }
+    .target-links-card h3 {
+      font-size: 15px;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .target-links-card p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 14px;
+    }
+    .links-row {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-open-target {
+      background: #1e293b;
+      color: #f1f5f9;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .btn-open-target:hover {
+      background: #6366f1;
+      border-color: #6366f1;
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <span>👻</span>
+      <span>Ghost Cursors Simulator</span>
+    </div>
+    <div class="nav-tabs">
+      <a href="mock_email.html" class="nav-link active">📨 Source: Mock Email</a>
+      <a href="mock_calendar.html" class="nav-link" target="_blank">📅 Target: Mock Calendar</a>
+      <a href="mock_tasks.html" class="nav-link" target="_blank">📋 Target: Mock Tasks</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="page-header">
+      <h1 class="page-title">Mock Email Client (Tab A: Context Source)</h1>
+      <p class="page-desc">
+        Highlight any text below and right-click <strong>"Send to Ghost Cursor"</strong>, or click the quick-send button.
+        Then open Tab B (Calendar or Tasks) to watch Ghost Cursor anticipate and glide into action!
+      </p>
+    </header>
+
+    <div class="inbox-list">
+      <!-- Email 1 -->
+      <article class="email-item">
+        <div class="email-header">
+          <span class="email-sender">Sarah Jenkins &lt;sjenkins@company.io&gt;</span>
+          <span class="email-time">10:42 AM</span>
+        </div>
+        <div class="email-subject">Sync for quarterly roadmap review</div>
+        <div class="email-body" id="email-body-1">
+          Hi team, please schedule a 1-on-1 sync with Sarah for tomorrow at 2:00 PM to review Q3 goals.
+        </div>
+        <div class="email-actions">
+          <button class="btn-quick-send" onclick="sendQuickIntent(1)">
+            <span>👻</span> Send to Ghost Cursor
+          </button>
+          <span class="sent-notice" id="sent-notice-1">✓ Sent! Now open Mock Calendar tab</span>
+        </div>
+      </article>
+
+      <!-- Email 2 -->
+      <article class="email-item">
+        <div class="email-header">
+          <span class="email-sender">David Chen &lt;dchen@company.io&gt;</span>
+          <span class="email-time">9:15 AM</span>
+        </div>
+        <div class="email-subject">Coffee chat catch up</div>
+        <div class="email-body" id="email-body-2">
+          Hey, let's grab a coffee chat with David on Tuesday at 10:30 AM to discuss new project ideas.
+        </div>
+        <div class="email-actions">
+          <button class="btn-quick-send" onclick="sendQuickIntent(2)">
+            <span>👻</span> Send to Ghost Cursor
+          </button>
+          <span class="sent-notice" id="sent-notice-2">✓ Sent! Now open Mock Calendar tab</span>
+        </div>
+      </article>
+
+      <!-- Email 3 -->
+      <article class="email-item">
+        <div class="email-header">
+          <span class="email-sender">Alex Rivera &lt;arivera@company.io&gt;</span>
+          <span class="email-time">Yesterday</span>
+        </div>
+        <div class="email-subject">Production bug on checkout screen</div>
+        <div class="email-body" id="email-body-3">
+          Urgent bug: Fix checkout button double-click issue assigned to Alex due Friday.
+        </div>
+        <div class="email-actions">
+          <button class="btn-quick-send" onclick="sendQuickIntent(3)">
+            <span>👻</span> Send to Ghost Cursor
+          </button>
+          <span class="sent-notice" id="sent-notice-3">✓ Sent! Now open Mock Tasks tab</span>
+        </div>
+      </article>
+    </div>
+
+    <section class="target-links-card">
+      <h3>Ready to test the cross-tab anticipation?</h3>
+      <p>Once you send an intent above, open either target tab below in a new window or tab:</p>
+      <div class="links-row">
+        <a href="mock_calendar.html" target="_blank" class="btn-open-target">
+          <span>📅</span> Open Mock Calendar Tab &rarr;
+        </a>
+        <a href="mock_tasks.html" target="_blank" class="btn-open-target">
+          <span>📋</span> Open Mock Tasks Tab &rarr;
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function showNotice(num) {
+      const notice = document.getElementById('sent-notice-' + num);
+      notice.style.display = 'inline';
+      setTimeout(() => { notice.style.display = 'none'; }, 5000);
+    }
+
+    function sendQuickIntent(num) {
+      const text = document.getElementById('email-body-' + num).innerText.trim();
+      if (typeof chrome !== 'undefined' && chrome.runtime?.sendMessage) {
+        chrome.runtime.sendMessage({ type: 'STORE_RAW_TEXT', text }, () => {
+          showNotice(num);
+        });
+      } else {
+        // Post message bridge picked up by content script
+        window.postMessage({ type: 'GHOST_QUICK_SEND', text, sourceNum: num }, '*');
+      }
+    }
+
+    window.addEventListener('message', (event) => {
+      if (event.data?.type === 'GHOST_QUICK_SEND_SUCCESS') {
+        const text = event.data.originalText;
+        [1, 2, 3].forEach(n => {
+          const el = document.getElementById('email-body-' + n);
+          if (el && el.innerText.trim() === text) {
+            showNotice(n);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

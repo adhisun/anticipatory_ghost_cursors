@@ -1,0 +1,9 @@
+{
+  "name": "anticipatory-ghost-cursors",
+  "version": "1.0.0",
+  "description": "Anticipatory Ghost Cursors (Cross-Tab Agents) Chrome Extension",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/test_parser.js"
+  }
+}

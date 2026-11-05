@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mock Calendar - Ghost Cursors Demo</title>
+  <link rel="stylesheet" href="demo_shared.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <span>👻</span>
+      <span>Ghost Cursors Simulator</span>
+    </div>
+    <div class="nav-tabs">
+      <a href="mock_email.html" class="nav-link">📨 Source: Mock Email</a>
+      <a href="mock_calendar.html" class="nav-link active">📅 Target: Mock Calendar</a>
+      <a href="mock_tasks.html" class="nav-link">📋 Target: Mock Tasks</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="page-header">
+      <h1 class="page-title">Mock Calendar (Tab B: Target Application)</h1>
+      <p class="page-desc">
+        When an event intent is pending from Tab A, Ghost Cursor automatically detects this calendar form,
+        displays a floating anticipation card, and glides an animated cursor across the inputs below.
+      </p>
+    </header>
+
+    <div class="card" id="calendar-form-card">
+      <h2 style="font-size: 18px; color: #ffffff; margin-bottom: 20px;">Create New Calendar Event</h2>
+
+      <form id="calendar-form" onsubmit="handleCalendarSubmit(event)">
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="event-title">Event Title</label>
+            <input type="text" id="event-title" placeholder="e.g. Sync with team" required autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="event-date">Date</label>
+            <input type="text" id="event-date" placeholder="YYYY-MM-DD or Tuesday" autocomplete="off">
+          </div>
+
+          <div class="form-group">
+            <label for="event-time">Time</label>
+            <input type="text" id="event-time" placeholder="e.g. 2:00 PM" autocomplete="off">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="event-attendee">Guest / Attendee</label>
+            <input type="text" id="event-attendee" placeholder="e.g. Sarah Jenkins" autocomplete="off">
+          </div>
+
+          <div class="form-group full-width">
+            <label for="event-description">Notes &amp; Agenda</label>
+            <textarea id="event-description" rows="3" placeholder="Add meeting agenda or notes..."></textarea>
+          </div>
+
+          <div class="form-group full-width" style="margin-top: 10px;">
+            <button type="submit" id="btn-save-event" class="btn-submit">
+              Save Event to Calendar
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div class="success-banner" id="calendar-success">
+        ✓ Event successfully saved! <span id="saved-summary"></span>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function handleCalendarSubmit(e) {
+      e.preventDefault();
+      const title = document.getElementById('event-title').value;
+      const date = document.getElementById('event-date').value;
+      const attendee = document.getElementById('event-attendee').value;
+      const banner = document.getElementById('calendar-success');
+      const summary = document.getElementById('saved-summary');
+
+      summary.textContent = `"${title}" on ${date || 'upcoming date'}${attendee ? ' with ' + attendee : ''}.`;
+      banner.style.display = 'block';
+
+      // Auto-hide after 6 seconds
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 6000);
+    }
+  </script>
+</body>
+</html>
